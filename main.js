@@ -1,3 +1,4 @@
+
 let start = document.getElementById("start");
 let playerStatus = document.getElementById("playerStatus");
 let cells = document.getElementsByClassName("cell");
@@ -11,6 +12,8 @@ start.addEventListener("click", () => {
 
 for (let elements of cells) {
   elements.addEventListener("click", (event) => {
+
+    if (event.target.textContent === ""){
     if (currentPlayer === "X") {
       event.target.textContent = "X";
       playerStatus.textContent = "Player O's Turn";
@@ -20,5 +23,7 @@ for (let elements of cells) {
       playerStatus.textContent = "Player X's Turn";
       currentPlayer = "X";
     }
+} else alert("Please select an empty cell.")
+
   });
 }
