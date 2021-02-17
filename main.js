@@ -1,19 +1,24 @@
-let start = document.getElementById('start');
-let playerStatus = document.getElementById('playerStatus');
-let cells = document.getElementsByClassName('cell');
-let X = document.getElementsByClassName('X');
-let O = document.getElementsByClassName('O');
+let start = document.getElementById("start");
+let playerStatus = document.getElementById("playerStatus");
+let cells = document.getElementsByClassName("cell");
+let currentPlayer = "X";
 
+start.addEventListener("click", () => {
+  start.disabled = true;
 
-
-start.addEventListener('click', () => {
-    start.disabled =true;
-
-    playerStatus.textContent = "Player X's turn";
-})
+  playerStatus.textContent = "Player X's Turn";
+});
 
 for (let elements of cells) {
-elements.addEventListener('click', (event) => {
-    event.target.img.src="/images/X.jpg";
-
-})}
+  elements.addEventListener("click", (event) => {
+    if (currentPlayer === "X") {
+      event.target.textContent = "X";
+      playerStatus.textContent = "Player O's Turn";
+      currentPlayer = "O";
+    } else {
+      event.target.textContent = "O";
+      playerStatus.textContent = "Player X's Turn";
+      currentPlayer = "X";
+    }
+  });
+}

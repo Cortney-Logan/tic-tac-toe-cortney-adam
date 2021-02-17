@@ -28,15 +28,3 @@ body{
     height: 100%;
     position: relative; 
 }
-
-.X {
-    width: 300px;
-    visibility: hidden;
-    position: absolute;
-}
-
-.O {
-    width: 300px;
-    position: absolute;
-    visibility: hidden;
-}
