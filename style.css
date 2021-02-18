@@ -9,8 +9,8 @@ body {
 
 /*----------gameboard----------*/
 .board {
-  width: 550px;
-  height: 550px;
+  width: 600px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,6 +27,8 @@ body {
   border: 1px solid red;
   width: 33%;
   height: 100%;
-  text-align: center;
-  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
 }
