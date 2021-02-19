@@ -10,10 +10,9 @@ let minuteTimer = document.getElementById("minutes");
 let secondTimer = document.getElementById("seconds");
 // declare variable to keep track of current player
 let currentPlayer = "X";
-let playerVplayer = document.getElementById('player-vs-player');
-let playerVcomputer = document.getElementById('player-vs-computer');
-let gameType="";
-
+let playerVplayer = document.getElementById("player-vs-player");
+let playerVcomputer = document.getElementById("player-vs-computer");
+let gameType = "";
 
 //declares hour, minute, and second counters for the game timer
 let hours = 0;
@@ -25,20 +24,25 @@ let timer;
 
 //while playervsplayer or playervcomputer are not disabled, start should be disabled (disabled = true)
 start.disabled = true;
+//playerStatus.textContent = "";
 
-playerVplayer.addEventListener('click',()=>{
+playerVplayer.addEventListener("click", () => {
   start.disabled = false;
   playerVplayer.disabled = true;
   playerVcomputer.disabled = true;
-  gameType="pVp"
-})
+  gameType = "pVp";
+  currentPlayer = "X";
+  playerStatus.textContent = "";
+});
 
-playerVcomputer.addEventListener('click',()=>{
+playerVcomputer.addEventListener("click", () => {
   start.disabled = false;
   playerVplayer.disabled = true;
   playerVcomputer.disabled = true;
-  gameType="pVc"
-})
+  currentPlayer = "X";
+  playerStatus.textContent = "";
+  gameType = "pVc";
+});
 
 //adds event listener to start button - when clicked the button is disabled and game play can begin
 start.addEventListener("click", () => {
@@ -64,10 +68,10 @@ start.addEventListener("click", () => {
     elements.textContent = "";
     elements.style.textDecoration = "none";
 
-    if(gameType==="pVp"){
-    //adds event listener to each cell to allow for game play
-    elements.addEventListener("click", playGame);
-    } else elements.addEventListener('click', playComputerGame)
+    if (gameType === "pVp") {
+      //adds event listener to each cell to allow for game play
+      elements.addEventListener("click", playGame);
+    } else elements.addEventListener("click", playComputerGame);
   }
 });
 
@@ -89,7 +93,7 @@ function playGame(event) {
     start.disabled = true;
     playerVplayer.disabled = false;
     playerVcomputer.disabled = false;
-    
+
     for (let elements of cells) {
       elements.removeEventListener("click", playGame);
     }
@@ -110,10 +114,41 @@ function playGame(event) {
   }
 }
 
-function playComputerGame(){
-  alert("this is the comptuer v player game")
-}
+function playComputerGame(event) {
+  if (event.target.textContent === "") {
+    // when the textContent of the cell will change to X or O depending on the currentPlayer.  The current player is then changed
+    if (currentPlayer === "X") {
+      event.target.textContent = "X";
+      
+    } else elements.removeEventListener("click", playComputerGame)
 
+    let randomGuess = Math.floor(Math.random() * 8);
+    console.log(randomGuess);
+    while (cells[randomGuess].textContent !== "") {
+      randomGuess = Math.floor(Math.random() * 8);
+    }
+    cells[randomGuess].textContent = "O";
+    elements.addEventListener("click", playComputerGame);
+  }else alert("Please select an empty cell.");
+  if (win()) {
+    playerStatus.textContent = `Player ${currentPlayer} Won`;
+    start.disabled = true;
+    playerVplayer.disabled = false;
+    playerVcomputer.disabled = false;
+
+    for (let elements of cells) {
+      elements.removeEventListener("click", playComputerGame);
+    }
+    clearInterval(timer);
+  } else {
+    if (currentPlayer === "X") {
+      currentPlayer = "O";
+    } else {
+      currentPlayer = "X";
+    }
+    playerStatus.textContent = `Player ${currentPlayer}'s Turn`;
+  }
+}
 //checks for win condition - if a condition is met it returns true, otherwise is undefined (which evaluates to false)
 function win() {
   //checks win condition for column 1
@@ -224,6 +259,14 @@ function timerPadding(num, size) {
   return padNum;
 }
 
+function compGuess() {
+  let newArray = [];
+  cells.forEach((element) => {
+    if (element.textContent === "");
+    newArray.push(element);
+  });
+  console.log(newArray);
+}
 // let textContentArr = []
 // for (let element in cells){
 // textContentArr[i]=cells[i].textContent
