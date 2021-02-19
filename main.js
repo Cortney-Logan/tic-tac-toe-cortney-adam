@@ -7,8 +7,26 @@ let cells = Array.from(document.getElementsByClassName("cell"));
 // declare variable to keep track of current player
 let currentPlayer = "X";
 
+let hourTimer = document.getElementById('hours');
+let minuteTimer = document.getElementById('minutes');
+let secondTimer = document.getElementById('seconds');
+
+let hours = 0;
+let minutes = 0;
+let seconds = 0;
+
+let timer;
+
 //adds event listener to start button - when clicked the button is disabled and game play can begin
 start.addEventListener("click", () => {
+
+  if (timer) {
+    clearInterval(timer);
+  }
+  hours = 0;
+  minutes = 0;
+  seconds = 0;
+  timer = setInterval( setTimer, 1000);
   //disables start button
   start.disabled = true;
   // player status shows "player x's turn"
@@ -42,6 +60,7 @@ function playGame(event) {
     for (let elements of cells) {
       elements.removeEventListener("click", playGame);
     }
+    clearInterval(timer);
   }
   // else if (tie()) {
   //   playerStatus.textContent = `Draw`;
@@ -133,6 +152,34 @@ function win() {
     return true;
   }
 }
+
+function setTimer() {
+  //seconds += 1;
+  //secondTimer.textContent = timerPadding(seconds, 2);
+  //minuteTimer.textContent = timerPadding(minutes, 2);
+  if (seconds === 60) {
+    minutes += 1;
+    seconds = 0;
+    minuteTimer.textContent = timerPadding(minutes, 2);
+  }
+  seconds += 1;
+  secondTimer.textContent = timerPadding(seconds, 2);
+  minuteTimer.textContent = timerPadding(minutes, 2);
+  
+  hourTimer.textContent = timerPadding(hours, 2);
+  if (minutes === 60) {
+      hours += 1;
+      minutes = 0;
+      hourTimer.textContent = timerPadding(hours, 2);
+    }
+  }
+
+function timerPadding(num, size) {
+  padNum = num+"";
+  while (padNum.length < size) padNum = "0" + padNum;
+  return padNum;
+}
+
 
 // let textContentArr = []
 // for (let element in cells){
