@@ -10,6 +10,10 @@ let minuteTimer = document.getElementById("minutes");
 let secondTimer = document.getElementById("seconds");
 // declare variable to keep track of current player
 let currentPlayer = "X";
+let playerVplayer = document.getElementById('player-vs-player');
+let playerVcomputer = document.getElementById('player-vs-computer');
+let gameType="";
+
 
 //declares hour, minute, and second counters for the game timer
 let hours = 0;
@@ -18,6 +22,23 @@ let seconds = 0;
 
 //declares timer interval to keep track of game timer time
 let timer;
+
+//while playervsplayer or playervcomputer are not disabled, start should be disabled (disabled = true)
+start.disabled = true;
+
+playerVplayer.addEventListener('click',()=>{
+  start.disabled = false;
+  playerVplayer.disabled = true;
+  playerVcomputer.disabled = true;
+  gameType="pVp"
+})
+
+playerVcomputer.addEventListener('click',()=>{
+  start.disabled = false;
+  playerVplayer.disabled = true;
+  playerVcomputer.disabled = true;
+  gameType="pVc"
+})
 
 //adds event listener to start button - when clicked the button is disabled and game play can begin
 start.addEventListener("click", () => {
@@ -43,8 +64,10 @@ start.addEventListener("click", () => {
     elements.textContent = "";
     elements.style.textDecoration = "none";
 
+    if(gameType==="pVp"){
     //adds event listener to each cell to allow for game play
     elements.addEventListener("click", playGame);
+    } else elements.addEventListener('click', playComputerGame)
   }
 });
 
@@ -63,7 +86,10 @@ function playGame(event) {
   //if win returns true, the current player is declared the winner, the start button is re-enabled and playGame click listener is removed from all cells
   if (win()) {
     playerStatus.textContent = `Player ${currentPlayer} Won`;
-    start.disabled = false;
+    start.disabled = true;
+    playerVplayer.disabled = false;
+    playerVcomputer.disabled = false;
+    
     for (let elements of cells) {
       elements.removeEventListener("click", playGame);
     }
@@ -82,6 +108,10 @@ function playGame(event) {
     }
     playerStatus.textContent = `Player ${currentPlayer}'s Turn`;
   }
+}
+
+function playComputerGame(){
+  alert("this is the comptuer v player game")
 }
 
 //checks for win condition - if a condition is met it returns true, otherwise is undefined (which evaluates to false)
