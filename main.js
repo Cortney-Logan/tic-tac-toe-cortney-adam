@@ -4,38 +4,45 @@ let start = document.getElementById("start");
 let playerStatus = document.getElementById("playerStatus");
 // declare js HTML collection targeting collection of game cells in game
 let cells = Array.from(document.getElementsByClassName("cell"));
+//declares js variable to target the hours, minutes, and seconds elements in the game timer
+let hourTimer = document.getElementById("hours");
+let minuteTimer = document.getElementById("minutes");
+let secondTimer = document.getElementById("seconds");
 // declare variable to keep track of current player
 let currentPlayer = "X";
 
-let hourTimer = document.getElementById('hours');
-let minuteTimer = document.getElementById('minutes');
-let secondTimer = document.getElementById('seconds');
-
+//declares hour, minute, and second counters for the game timer
 let hours = 0;
 let minutes = 0;
 let seconds = 0;
 
+//declares timer interval to keep track of game timer time
 let timer;
 
 //adds event listener to start button - when clicked the button is disabled and game play can begin
 start.addEventListener("click", () => {
-
+  //clears the game timer to 0
   if (timer) {
     clearInterval(timer);
   }
+  //resets hour, minute, second counters for game timer
   hours = 0;
   minutes = 0;
   seconds = 0;
-  timer = setInterval( setTimer, 1000);
+  //initiates the game timer to run ever second
+  timer = setInterval(setTimer, 1000);
+
   //disables start button
   start.disabled = true;
   // player status shows "player x's turn"
   playerStatus.textContent = "Player X's Turn";
+
   //runs through each cell
   for (let elements of cells) {
     //clear the board for a new game
     elements.textContent = "";
     elements.style.textDecoration = "none";
+
     //adds event listener to each cell to allow for game play
     elements.addEventListener("click", playGame);
   }
@@ -153,33 +160,39 @@ function win() {
   }
 }
 
+//setTimer function prints the updated time to the game board with correct formatting
 function setTimer() {
   //seconds += 1;
   //secondTimer.textContent = timerPadding(seconds, 2);
   //minuteTimer.textContent = timerPadding(minutes, 2);
-  if (seconds === 60) {
+
+  //if 59 seconds have reached 59, the next second will reset seconds to 0 and iterate minutes by 1
+  if (seconds === 59) {
     minutes += 1;
     seconds = 0;
-    minuteTimer.textContent = timerPadding(minutes, 2);
-  }
-  seconds += 1;
-  secondTimer.textContent = timerPadding(seconds, 2);
-  minuteTimer.textContent = timerPadding(minutes, 2);
-  
-  hourTimer.textContent = timerPadding(hours, 2);
-  if (minutes === 60) {
+    if (minutes === 60) {
       hours += 1;
       minutes = 0;
-      hourTimer.textContent = timerPadding(hours, 2);
     }
   }
+  //else only iterate seconds
+  else {
+    seconds += 1;
+    // secondTimer.textContent = timerPadding(seconds, 2);
+    // minuteTimer.textContent = timerPadding(minutes, 2);
+  }
+  //print out updated seconds, minutes and hours to game board
+  secondTimer.textContent = timerPadding(seconds, 2);
+  minuteTimer.textContent = timerPadding(minutes, 2);
+  hourTimer.textContent = timerPadding(hours, 2);
+}
 
+//padding function takes a number and a size as the number of characters and adds leading 0s until the number string is the correct size
 function timerPadding(num, size) {
-  padNum = num+"";
+  padNum = num + "";
   while (padNum.length < size) padNum = "0" + padNum;
   return padNum;
 }
-
 
 // let textContentArr = []
 // for (let element in cells){
