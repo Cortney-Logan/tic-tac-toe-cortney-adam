@@ -13,6 +13,8 @@ start.addEventListener("click", () => {
   start.disabled = true;
   playerStatus.textContent = "Player X's Turn";
 });
+
+while (start.disabled = true) {
 //adds event listener to each cell
 for (let elements of cells) {
   // when clicked the textContent of the cell will change to X or O depending on the currentPlayer.  The current player is then changed
@@ -44,6 +46,7 @@ for (let elements of cells) {
     }
   });
 }
+} alert("You haven/'t started the game yet.");
 
 //checks for win condition - if a condition is met it returns true, otherwise is undefined (which evaluates to false)
 function win() {
