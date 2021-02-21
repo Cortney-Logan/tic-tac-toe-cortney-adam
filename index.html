@@ -1,49 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link href="style.css" rel="stylesheet" />
-    <title>Tic Tac Toe</title>
-  </head>
 
-  <body>
-    <!---------- headline ---------->
-    <h2>Tic Tac Toe</h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="style.css" rel="stylesheet" />
+  <title>Tic Tac Toe</title>
+</head>
+
+<body>
+  <!---------- headline ---------->
+  <h2>Tic Tac Toe</h2>
+  <!---------- game play container ---------->
+  <div id="game-play-container">
+    <!---------- player X container ---------->
+    <div class="player-panel" id="playerXpanel">
+      <h1 id="player-X-name">Player X</h1>
+      <h2>X's</h2>
+      <form class='choose-name' id='set-player-X-name'>
+        <input type='text' id="playerX">
+        </br>
+        <input type='submit' value="Change Name">
+      </form>
+    </div>
     <!---------- gameboard ---------->
-    <div class="board">
-      <!---------- row 1 container ---------->
-      <div id="row-1">
-        <div class="cell" id="cell-0"></div>
-        <div class="cell" id="cell-1"></div>
-        <div class="cell" id="cell-2"></div>
+      <div class="board">
+        <!---------- row 1 container ---------->
+        <div id="row-1">
+          <div class="cell" id="cell-0"></div>
+          <div class="cell" id="cell-1"></div>
+          <div class="cell" id="cell-2"></div>
+        </div>
+        <!---------- row 2 container ---------->
+        <div id="row-2">
+          <div class="cell" id="cell-3"></div>
+          <div class="cell" id="cell-4"></div>
+          <div class="cell" id="cell-5"></div>
+        </div>
+        <!---------- row 3 container ---------->
+        <div id="row-3">
+          <div class="cell" id="cell-6"></div>
+          <div class="cell" id="cell-7"></div>
+          <div class="cell" id="cell-8"></div>
+        </div>
       </div>
-      <!---------- row 2 container ---------->
-      <div id="row-2">
-        <div class="cell" id="cell-3"></div>
-        <div class="cell" id="cell-4"></div>
-        <div class="cell" id="cell-5"></div>
-      </div>
-      <!---------- row 3 container ---------->
-      <div id="row-3">
-        <div class="cell" id="cell-6"></div>
-        <div class="cell" id="cell-7"></div>
-        <div class="cell" id="cell-8"></div>
-      </div>
+    <!---------- player O container  ---------->
+    <div class="player-panel" id="playerOpanel">
+      <h1 id="player-O-name">Player O</h1>
+      <h2>O's</h2>
+      <form class='choose-name' id='set-player-O-name'>
+        <input type='text' id="playerO">
+        </br>
+        <input type='submit' value="Change Name">
+      </form>
     </div>
-    <!---------- player status container ---------->
-    <div class="status">
-      <!-- start button -->
-      <button id="start" type="button">Start Game</button>
-      <!-- player status -->
-      <p id="playerStatus"></p>
-    </div>
-    <div id="timer">Game Timer:  <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span></div>
-    <div id="select-game">
-      <button id="player-vs-player">Player-v-Player</button>
-      <button id="player-vs-computer">Player-v-Computer</button>
-    </div>
-    <script src="main.js"></script>
-  </body>
+  </div>
+  <!---------- player status container ---------->
+  <div class="status">
+    <!-- start button -->
+    <button id="start" type="button">Start Game</button>
+    <!-- player status -->
+    <p id="playerStatus"></p>
+  </div>
+  <!---------- game timer ---------->
+  <div id="timer">
+    Game Timer: <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+  </div>
+  <!---------- game selector container ---------->
+  <div id="select-game">
+    <button id="player-vs-player">Player-v-Player</button>
+    <button id="player-vs-computer">Player-v-Computer</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
 </html>

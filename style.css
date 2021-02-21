@@ -32,3 +32,40 @@ body {
   align-items: center;
   font-size: 5rem;
 }
+
+.status{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-play-container{
+  display:flex;
+  justify-content: space-between;
+  border: 10px;
+}
+
+#playerStatus{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 500px;
+}
+
+.player-panel{
+  height: 600px;
+  width: 20vw;
+  text-align: center;
+}
+
+.player-panel p{
+  height: 25px;
+  width: auto;
+  text-align: center;
+}
+
+.choose-name{
+  visibility: hidden;
+}
