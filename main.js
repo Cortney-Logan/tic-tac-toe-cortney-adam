@@ -143,14 +143,18 @@ function chooseNames() {
 
 function playGame(event) {
   //guard clause to prevent a previously clicked cell from being clicked again. If it has already been clicked the player is alerted to pick an empty cell.  Otherwise it marks the cell appropriately
-  if (event.target.textContent === "") {
+  if (event.target.textContent !== "") {
+    alert("Please select an empty cell.");
+  }
     // when the textContent of the cell will change to X or O depending on the currentPlayer.  The current player is then changed
-    if (currentPlayer === "X") {
+    else if (event.target.textContent === "") {
+      
+      if (currentPlayer === "X") {
       event.target.textContent = "X";
     } else {
       event.target.textContent = "O";
     }
-  } else alert("Please select an empty cell.");
+  
 
   //check for win condition by calling win() function
   //if win returns true, the current player is declared the winner, the start button is re-enabled and playGame click listener is removed from all cells
@@ -165,11 +169,16 @@ function playGame(event) {
     }
     clearInterval(timer);
   }
-  // else if (tie()) {
-  //   playerStatus.textContent = `Draw`;
-  //   start.disabled = false;
-  // }
-  // if there's no win it changes the current player changes and game alerts that it is the next player's turn
+  else if (tie()) {
+    playerStatus.textContent = " It\'s a Tie, Play Again?";
+    start.disabled = true;
+    playerVplayer.disabled = false;
+    playerVcomputer.disabled = false;
+    for (let elements of cells) {
+      elements.removeEventListener("click", playGame);
+    }
+    clearInterval(timer);
+  }
   else {
     if (currentPlayer === "X") {
       currentPlayer = "O";
@@ -181,23 +190,28 @@ function playGame(event) {
     playerStatus.textContent = `${currentPlayerName}'s Turn`;
   }
 }
+}
 
 function playComputerGame(event) {
-  if (event.target.textContent === "") {
-    // when the textContent of the cell will change to X or O depending on the currentPlayer.  The current player is then changed
-    if (currentPlayer === "X") {
-      event.target.textContent = "X";
-    } else elements.removeEventListener("click", playComputerGame);
+  if (event.target.textContent !== ""){
+    alert("Please select an empty cell.");
+  }
 
-    let randomGuess = Math.floor(Math.random() * 8);
-    console.log(randomGuess);
-    while (cells[randomGuess].textContent !== "") {
-      randomGuess = Math.floor(Math.random() * 8);
-    }
-    cells[randomGuess].textContent = "O";
-    elements.addEventListener("click", playComputerGame);
-  } else alert("Please select an empty cell.");
-  if (win()) {
+  else if (event.target.textContent === "") {
+    // when the textContent of the cell will change to X or O depending on the currentPlayer.  The current player is then changed
+  
+      // when the textContent of the cell will change to X or O depending on the currentPlayer.  The current player is then changed
+      if (currentPlayer === "X") {
+        event.target.textContent = "X";
+      } else {
+        let randomGuess = Math.floor(Math.random() * 8);
+        while (cells[randomGuess].textContent !== "") {
+          randomGuess = Math.floor(Math.random() * 8);
+        }
+        cells[randomGuess].textContent = "O";
+  }
+
+   if (win()) {
     playerStatus.textContent = `Player ${currentPlayer} Won`;
     start.disabled = true;
     playerVplayer.disabled = false;
@@ -207,17 +221,28 @@ function playComputerGame(event) {
       elements.removeEventListener("click", playComputerGame);
     }
     clearInterval(timer);
-  }
-    else {
-      if (currentPlayer === "X") {
-        currentPlayer = "O";
-        currentPlayerName = playerOName;
-      } else {
-        currentPlayer = "X";
-        currentPlayerName = playerXName;
-      }
-      playerStatus.textContent = `${currentPlayerName}'s Turn`;
+  } 
+  else if (tie()) {
+    playerStatus.textContent = " It\'s a Tie, Play Again?";
+    start.disabled = true;
+    playerVplayer.disabled = false;
+    playerVcomputer.disabled = false;
+    for (let elements of cells) {
+      elements.removeEventListener("click", playGame);
     }
+    clearInterval(timer);
+  }
+  
+  else {
+    if (currentPlayer === "X") {
+      currentPlayer = "O";
+    } else {
+      currentPlayer = "X";
+    }
+    playerStatus.textContent = `Player ${currentPlayer}'s Turn`;
+  
+  }
+}
 }
 //checks for win condition - if a condition is met it returns true, otherwise is undefined (which evaluates to false)
 function win() {
@@ -344,24 +369,20 @@ function timerPadding(num, size) {
   return padNum;
 }
 
-function compGuess() {
-  let newArray = [];
-  cells.forEach((element) => {
-    if (element.textContent === "");
-    newArray.push(element);
-  });
-  console.log(newArray);
-}
-// let textContentArr = []
-// for (let element in cells){
-// textContentArr[i]=cells[i].textContent
-// }
+function tie() {
+  if (
+    (cells[0].textContent === "X" || cells[0].textContent === "O") &&
+    (cells[1].textContent === "X" || cells[1].textContent === "O") &&
+    (cells[2].textContent === "X" || cells[2].textContent === "O") &&
+    (cells[3].textContent === "X" || cells[3].textContent === "O") &&
+    (cells[4].textContent === "X" || cells[4].textContent === "O") &&
+    (cells[5].textContent === "X" || cells[5].textContent === "O") &&
+    (cells[6].textContent === "X" || cells[6].textContent === "O") &&
+    (cells[7].textContent === "X" || cells[7].textContent === "O") &&
+    (cells[8].textContent === "X" || cells[8].textContent === "O")){
 
-// function tie() {
-//   cells.forEach((element) => {
-//     if (!element.textContent) {
-//       console.log("element.textContent is not equal to '' and is: "+element.textContent)
-//       return true;
-//     } else return false;
-//   });
-// }
+    return true;
+}
+    return false;
+
+}
