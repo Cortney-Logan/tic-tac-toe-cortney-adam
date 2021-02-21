@@ -101,7 +101,6 @@ start.addEventListener("click", () => {
 });
 
 //-------------------- Functions --------------------//
-
 //accepts user name and changes value
 function chooseNames() {
   //prompts users to enter name
