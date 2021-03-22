@@ -48,7 +48,6 @@ let timer;
 //while playervsplayer or playervcomputer are not disabled, start should be disabled (disabled = true)
 start.disabled = true;
 
-
 //-------------------- Event Listeners --------------------//
 
 //add event listener to Player V Player Game Button ----------//
@@ -68,7 +67,8 @@ playerVcomputer.addEventListener("click", () => {
   playerVplayer.disabled = true;
   playerVcomputer.disabled = true;
   currentPlayer = "X";
-  playerStatus.textContent = " Player must click into an empty cell in order for computer to randomly guess";
+  playerStatus.textContent =
+    " Player must click into an empty cell in order for computer to randomly guess";
   gameType = "pVc";
   playerXNameDisplay.textContent = "Player X";
   playerONameDisplay.textContent = "Player O";
@@ -103,7 +103,7 @@ start.addEventListener("click", () => {
   for (let elements of cells) {
     //clear the board for a new game
     elements.textContent = "";
-    elements.style.backgroundColor = "white";
+    elements.style.backgroundColor = "#F4F2ED";
 
     // game type id player v player or player v computer
     if (gameType === "pVp") {
@@ -183,7 +183,7 @@ function playGame(event) {
       }
       //resets timer
       clearInterval(timer);
-      
+
       //check for tie condition
       //if tie, re-enable buttons to play again
     } else if (tie()) {
@@ -211,18 +211,15 @@ function playGame(event) {
   }
 }
 
-
 // Player vs Computer game function
 function playComputerGame(event) {
   if (event.target.textContent !== "") {
     alert("Please select an empty cell.");
   } else if (event.target.textContent === "") {
-
     // when the textContent of the cell will change to X or O depending on the currentPlayer.  The current player is then changed
     if (currentPlayer === "X") {
       event.target.textContent = "X";
     } else {
-
       // random guess by computer via randomGuess function
       let randomGuess = Math.floor(Math.random() * 8);
       while (cells[randomGuess].textContent !== "") {
@@ -238,7 +235,6 @@ function playComputerGame(event) {
       start.disabled = true;
       playerVplayer.disabled = false;
       playerVcomputer.disabled = false;
-
 
       //removes event listener on cells
       for (let elements of cells) {
@@ -365,7 +361,6 @@ function win() {
 }
 //setTimer function prints the updated time to the game board with correct formatting
 function setTimer() {
-
   //if 59 seconds have reached 59, the next second will reset seconds to 0 and iterate minutes by 1
   if (seconds === 59) {
     minutes += 1;
@@ -379,7 +374,6 @@ function setTimer() {
   //else only iterate seconds
   else {
     seconds += 1;
-  
   }
 
   //print out updated seconds, minutes and hours to game board

@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap');
+
+/* Colors:
+blue: A3D2D8
+pink: C73D67
+tan: F4F2ED
+grey: 4A4A4A/
+
+
 /*----------body----------*/
 body {
   display: flex;
@@ -5,19 +14,27 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0;
+  background-color: #F4F2ED;
+  font-family: 'Josefin Sans', sans-serif;
+  color: #4A4A4A;
 }
 
 /*----------gameboard----------*/
 
+.double-border{
+  border: 4px double #A3D2D8;
+  padding: 15px;
+  color: #4A4A4A;
+}
+
 #game-play-container{
   display:flex;
   justify-content: space-between;
-  border: 10px;
 }
 
 .board {
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,17 +44,25 @@ body {
   width: 100%;
   height: 33%;
   display: flex;
-  border: 1px solid red;
+}
+
+#row-2, #row-3{
+  border-top: 3px solid #C73D67;
+}
+
+#cell-0, #cell-3, #cell-6, #cell-1, #cell-4, #cell-7{
+  border-right: 3px solid #C73D67;
 }
 
 .cell {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 33%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 5rem;
+  color:  #C73D67;
 }
 
 /************ Player Status Continer *********************/
@@ -60,7 +85,7 @@ body {
 /************ Player Names Panels *****************/
 
 .player-panel{
-  height: 600px;
+  height: 500px;
   width: 20vw;
   text-align: center;
 }
@@ -73,4 +98,12 @@ body {
 
 .choose-name{
   visibility: hidden;
+}
+
+button, .button{
+  border: 4px double #A3D2D8;
+  width: 200px;
+  height: 50px;
+  color: #4A4A4A;
+  margin: 15px;
 }
